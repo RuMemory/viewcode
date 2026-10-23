@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>viewcode — реестр вайбкодных продуктов</title>
+<style>
+  :root {
+    --paper: #fbfbfa;
+    --sheet: #ffffff;
+    --ink: #141414;
+    --ink-2: #4d4d4d;
+    --ink-3: #8a8a8a;
+    --line: #d8d8d5;
+    --line-strong: #141414;
+    --accent: #1a3fd4;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    --sans: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ---------- шапка ---------- */
+  header.top { border-bottom: 2px solid var(--line-strong); background: var(--sheet); }
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: stretch;
+    min-height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    padding-right: 28px;
+    border-right: 1px solid var(--line);
+    font-weight: 700; font-size: 18px; letter-spacing: -.4px;
+  }
+  .logo .box {
+    width: 14px; height: 14px;
+    background: var(--accent);
+  }
+  .search {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 24px;
+    color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px;
+    border-right: 1px solid var(--line);
+  }
+  .search .q { color: var(--ink-3); }
+  .topbar .cell {
+    display: flex; align-items: center;
+    padding: 0 22px;
+    font-size: 12.5px; font-weight: 600;
+    border-right: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .topbar .cell:last-child { border-right: none; }
+  .cell.cta { background: var(--ink); color: #fff; }
+  .cell.cta:hover { background: var(--accent); color: #fff; }
+
+  /* ---------- строка спецификации ---------- */
+  .spec-strip {
+    border-bottom: 1px solid var(--line);
+    background: var(--sheet);
+  }
+  .spec-strip .wrap {
+    display: flex; justify-content: space-between; gap: 24px;
+    padding-top: 10px; padding-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- секции ---------- */
+  section { padding: 40px 0 0; }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 16px;
+    border-bottom: 2px solid var(--line-strong);
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+  .sec-head .secno { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 700; }
+  .sec-head h2 {
+    font-size: 21px; font-weight: 700; letter-spacing: -.4px;
+    text-transform: uppercase;
+  }
+  .sec-head .tail { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+  .ad-tag {
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--ink);
+    padding: 3px 7px;
+  }
+  .cat-tag {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+    background: var(--sheet);
+  }
+  .score-box {
+    font-family: var(--mono); font-weight: 700; font-size: 13px;
+    border: 1.5px solid var(--ink);
+    padding: 4px 9px;
+    background: var(--sheet);
+  }
+  .score-box.top { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ---------- рекомендуем: три колонки-спеки ---------- */
+  .featured {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--sheet);
+  }
+  .fcard {
+    padding: 0;
+    border-right: 1px solid var(--line);
+    display: flex; flex-direction: column;
+  }
+  .fcard:last-child { border-right: none; }
+  .fcard:hover { background: #f6f6f4; }
+  .fcard .cover {
+    height: 148px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .cover.c1 { background: linear-gradient(160deg, #c6cfee 0%, #6f83d9 60%, #1a3fd4 140%); }
+  .cover.c2 { background: linear-gradient(160deg, #d9d9d6 0%, #9a9a95 55%, #3c3c38 130%); }
+  .cover.c3 { background: linear-gradient(160deg, #e8dfd2 0%, #b3a187 60%, #5c4f38 130%); }
+  .cover .ad-tag { position: absolute; top: 10px; right: 10px; }
+  .cover .fig {
+    position: absolute; left: 12px; bottom: 8px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,.85);
+  }
+  .fcard .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .fcard .fname {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  }
+  .fcard h3 { font-size: 17px; font-weight: 700; letter-spacing: -.2px; }
+  .fcard .fidx { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+  .fcard p { color: var(--ink-2); font-size: 13px; flex: 1; }
+  .fcard .meta {
+    display: flex; gap: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+  .fcard .meta .m {
+    flex: 1;
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .fcard .meta .m + .m { border-left: 1px solid var(--line); padding-left: 12px; }
+  .fcard .meta .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-3); }
+  .fcard .meta .v { font-family: var(--mono); font-size: 14px; font-weight: 700; }
+
+  /* ---------- запуски дня: таблица ---------- */
+  table.spec {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--sheet);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  table.spec th {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  table.spec th.r, table.spec td.r { text-align: right; }
+  table.spec td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  table.spec tbody tr:last-child td { border-bottom: none; }
+  table.spec tbody tr:hover td { background: #f6f6f4; }
+  td .pname { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+  td .pdesc { color: var(--ink-2); font-size: 12.5px; max-width: 46ch; }
+  td .thumb {
+    display: inline-block; width: 34px; height: 34px;
+    border: 1px solid var(--line-strong);
+    vertical-align: middle;
+  }
+  .t1 { background: linear-gradient(160deg,#c6cfee,#1a3fd4); }
+  .t2 { background: linear-gradient(160deg,#d9d9d6,#3c3c38); }
+  .t3 { background: linear-gradient(160deg,#e8dfd2,#5c4f38); }
+  .t4 { background: linear-gradient(160deg,#d2e4e0,#2f6b60); }
+  .t5 { background: linear-gradient(160deg,#ecdcdc,#8c3a3a); }
+  td .statnum { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .delta { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+
+  /* ---------- слайдер ---------- */
+  .rail {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--sheet);
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink) var(--paper);
+  }
+  .tile {
+    scroll-snap-align: start;
+    flex: 0 0 208px;
+    border-right: 1px solid var(--line);
+    display: flex; flex-direction: column;
+  }
+  .tile:hover { background: #f6f6f4; }
+  .tile .tcover { height: 86px; border-bottom: 1px solid var(--line); }
+  .g1 { background: linear-gradient(160deg,#c6cfee,#3a54c9); } .g2 { background: linear-gradient(160deg,#d9d9d6,#55554f); }
+  .g3 { background: linear-gradient(160deg,#e8dfd2,#8a795c); } .g4 { background: linear-gradient(160deg,#d2e4e0,#3d8577); }
+  .g5 { background: linear-gradient(160deg,#ecdcdc,#a35252); } .g6 { background: linear-gradient(160deg,#ded9ec,#6a5c9e); }
+  .g7 { background: linear-gradient(160deg,#dce8d2,#5c7a44); } .g8 { background: linear-gradient(160deg,#e4e2d2,#8a8144); }
+  .g9 { background: linear-gradient(160deg,#d2dfe8,#4a6e8c); } .g10{ background: linear-gradient(160deg,#e8d2dd,#9e4a6e); }
+  .tile .tbody { padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .tile .tname { font-weight: 700; font-size: 13px; }
+  .tile .tmeta {
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .tile .tmeta .s { color: var(--ink); font-weight: 700; }
+
+  /* ---------- лидеры по категориям ---------- */
+  .leaders {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--sheet);
+  }
+  .lcol { border-right: 1px solid var(--line); padding: 20px; }
+  .lcol:last-child { border-right: none; }
+  .lcol .lhead {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 8px; margin-bottom: 4px;
+  }
+  .lcol h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
+  .lcol .lhead span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+  .litem {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .litem:last-child { border-bottom: none; }
+  .litem .rank { font-family: var(--mono); font-size: 11px; color: var(--accent); font-weight: 700; width: 20px; }
+  .litem .n { flex: 1; min-width: 0; }
+  .litem .t { font-size: 13.5px; font-weight: 650; }
+  .litem .d { font-size: 12px; color: var(--ink-2); }
+  .litem .v { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
+
+  /* ---------- дайджест ---------- */
+  .digest {
+    margin-top: 40px;
+    border: 2px solid var(--line-strong);
+    background: var(--sheet);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .digest .dleft {
+    padding: 30px 32px;
+    border-right: 1px solid var(--line);
+  }
+  .digest h2 {
+    font-size: 22px; font-weight: 700; letter-spacing: -.4px;
+    text-transform: uppercase;
+    margin: 8px 0 10px;
+  }
+  .digest p { color: var(--ink-2); font-size: 13px; max-width: 48ch; }
+  .digest .dright {
+    padding: 30px 32px;
+    display: flex; flex-direction: column; justify-content: center; gap: 12px;
+  }
+  .digest input {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 12px 14px;
+    font-family: var(--mono); font-size: 13px;
+    outline: none;
+    border-radius: 0;
+  }
+  .digest input:focus { border-color: var(--accent); }
+  .digest button {
+    border: none;
+    background: var(--ink); color: #fff;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: .8px; text-transform: uppercase;
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+  .digest button:hover { background: var(--accent); }
+
+  /* ---------- футер ---------- */
+  footer { margin-top: 56px; border-top: 2px solid var(--line-strong); background: var(--sheet); }
+  .fgrid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .fcol { padding: 28px 24px; border-right: 1px solid var(--line); }
+  .fcol:last-child { border-right: none; }
+  .fcol h4 {
+    font-family: var(--mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+  .fcol ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .fcol a { font-size: 13px; color: var(--ink-2); }
+  .fbrand .logo { border: none; padding: 0; }
+  .fbrand p { color: var(--ink-2); font-size: 12.5px; max-width: 34ch; margin-top: 12px; }
+  .fbottom {
+    display: flex; justify-content: space-between;
+    padding: 14px 0 18px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    letter-spacing: .5px;
+  }
+
+  @media (max-width: 940px) {
+    .featured, .leaders, .fgrid { grid-template-columns: 1fr; }
+    .fcard, .lcol, .fcol { border-right: none; border-bottom: 1px solid var(--line); }
+    .digest { grid-template-columns: 1fr; }
+    .digest .dleft { border-right: none; border-bottom: 1px solid var(--line); }
+    .search { display: none; }
+    table.spec .hide-m { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap topbar">
+    <a class="logo" href="#"><span class="box"></span>viewcode</a>
+    <div class="search"><span class="q">ПОИСК:</span><span>название, автор, стек…</span></div>
+    <a class="cell" href="#">Войти через GitHub</a>
+    <a class="cell cta" href="#">+ Разместить проект</a>
+  </div>
+</header>
+
+<div class="spec-strip">
+  <div class="wrap">
+    <span class="label">Реестр вайбкодных продуктов</span>
+    <span class="label">Док. VC-2026-042 · Рев. 7</span>
+    <span class="label num">Записей: 4 217</span>
+    <span class="label num">Обновлено: 20.10.2026 / 09:00 МСК</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- РЕКОМЕНДУЕМ -->
+  <section>
+    <div class="sec-head">
+      <span class="secno">§ 01</span>
+      <h2>Рекомендуем</h2>
+      <span class="tail">РЕКЛАМНЫЕ МЕСТА · НЕДЕЛЯ 43</span>
+    </div>
+    <div class="featured">
+      <article class="fcard">
+        <div class="cover c1"><span class="ad-tag">Ad</span><span class="fig">Рис. 01-A — обложка</span></div>
+        <div class="body">
+          <div class="fname"><h3>doc-diver</h3><span class="fidx">№ 0041</span></div>
+          <p>Поиск по документации любого фреймворка из терминала. Оффлайн-индекс, ответы с примерами кода за 40 мс.</p>
+          <div class="meta">
+            <div class="m"><span class="k">Звёзды</span><span class="v">7 941</span></div>
+            <div class="m"><span class="k">Лайки</span><span class="v">402</span></div>
+            <div class="m"><span class="k">Скор</span><span class="v">9.4</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="fcard">
+        <div class="cover c2"><span class="ad-tag">Ad</span><span class="fig">Рис. 01-B — обложка</span></div>
+        <div class="body">
+          <div class="fname"><h3>sapsan</h3><span class="fidx">№ 0117</span></div>
+          <p>Self-hosted аналитика без кук и баннеров согласия. Один бинарник на Go, дашборд из коробки.</p>
+          <div class="meta">
+            <div class="m"><span class="k">Звёзды</span><span class="v">2 307</span></div>
+            <div class="m"><span class="k">Лайки</span><span class="v">198</span></div>
+            <div class="m"><span class="k">Скор</span><span class="v">8.7</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="fcard">
+        <div class="cover c3"><span class="ad-tag">Ad</span><span class="fig">Рис. 01-C — обложка</span></div>
+        <div class="body">
+          <div class="fname"><h3>kvazimodo</h3><span class="fidx">№ 0089</span></div>
+          <p>Мок-сервер из OpenAPI-спеки одной командой. Фейковые данные, задержки и коды ошибок по сценарию.</p>
+          <div class="meta">
+            <div class="m"><span class="k">Звёзды</span><span class="v">5 120</span></div>
+            <div class="m"><span class="k">Лайки</span><span class="v">356</span></div>
+            <div class="m"><span class="k">Скор</span><span class="v">9.1</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ЗАПУСКИ ДНЯ -->
+  <section>
+    <div class="sec-head">
+      <span class="secno">§ 02</span>
+      <h2>Запуски дня</h2>
+      <span class="tail num">20.10.2026 · N = 5</span>
+    </div>
+    <table class="spec">
+      <thead>
+        <tr>
+          <th style="width:40px">№</th>
+          <th>Продукт / назначение</th>
+          <th class="hide-m">Категория</th>
+          <th class="r">★ GitHub</th>
+          <th class="r hide-m">Δ за сутки</th>
+          <th class="r">Лайки</th>
+          <th class="r">Скор</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">01</td>
+          <td>
+            <div class="pname"><span class="thumb t1"></span>гипертекст</div>
+            <div class="pdesc">Редактор заметок с локальной LLM: ссылки между мыслями подсказывает модель на вашем железе</div>
+          </td>
+          <td class="hide-m"><span class="cat-tag">Продуктивность</span></td>
+          <td class="r statnum">4 812</td>
+          <td class="r delta hide-m">+612</td>
+          <td class="r statnum">312</td>
+          <td class="r"><span class="score-box top">9.1</span></td>
+        </tr>
+        <tr>
+          <td class="num">02</td>
+          <td>
+            <div class="pname"><span class="thumb t2"></span>окно</div>
+            <div class="pdesc">Тайловый оконный менеджер для браузера: раскладывает вкладки по сетке хоткеем</div>
+          </td>
+          <td class="hide-m"><span class="cat-tag">Продуктивность</span></td>
+          <td class="r statnum">1 048</td>
+          <td class="r delta hide-m">+204</td>
+          <td class="r statnum">187</td>
+          <td class="r"><span class="score-box">8.4</span></td>
+        </tr>
+        <tr>
+          <td class="num">03</td>
+          <td>
+            <div class="pname"><span class="thumb t3"></span>smetana</div>
+            <div class="pdesc">Генератор смет и актов для фрилансеров: из голосового описания задачи — в подписанный PDF</div>
+          </td>
+          <td class="hide-m"><span class="cat-tag">Финансы</span></td>
+          <td class="r statnum">673</td>
+          <td class="r delta hide-m">+98</td>
+          <td class="r statnum">154</td>
+          <td class="r"><span class="score-box">7.9</span></td>
+        </tr>
+        <tr>
+          <td class="num">04</td>
+          <td>
+            <div class="pname"><span class="thumb t4"></span>kadr</div>
+            <div class="pdesc">API скриншотов сайтов: один GET — снапшот в WebP с нужным вьюпортом и задержкой</div>
+          </td>
+          <td class="hide-m"><span class="cat-tag">API</span></td>
+          <td class="r statnum">912</td>
+          <td class="r delta hide-m">+141</td>
+          <td class="r statnum">96</td>
+          <td class="r"><span class="score-box">7.6</span></td>
+        </tr>
+        <tr>
+          <td class="num">05</td>
+          <td>
+            <div class="pname"><span class="thumb t5"></span>svodka</div>
+            <div class="pdesc">Персональный дайджест GitHub и HN в почту: только то, что совпадает с вашим стеком</div>
+          </td>
+          <td class="hide-m"><span class="cat-tag">Рассылки</span></td>
+          <td class="r statnum">389</td>
+          <td class="r delta hide-m">+57</td>
+          <td class="r statnum">71</td>
+          <td class="r"><span class="score-box">7.2</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- СЛАЙДЕР -->
+  <section>
+    <div class="sec-head">
+      <span class="secno">§ 03</span>
+      <h2>Рост звёзд</h2>
+      <span class="tail">ТОП-10 ПО ПРИРОСТУ · 7 ДНЕЙ →</span>
+    </div>
+    <div class="rail">
+      <div class="tile"><div class="tcover g1"></div><div class="tbody"><div class="tname">bunker</div><div class="tmeta"><span>★ 3 204</span><span class="s">9.0</span></div></div></div>
+      <div class="tile"><div class="tcover g2"></div><div class="tbody"><div class="tname">polka</div><div class="tmeta"><span>★ 1 876</span><span class="s">8.6</span></div></div></div>
+      <div class="tile"><div class="tcover g3"></div><div class="tbody"><div class="tname">tihiy</div><div class="tmeta"><span>★ 2 540</span><span class="s">8.2</span></div></div></div>
+      <div class="tile"><div class="tcover g4"></div><div class="tbody"><div class="tname">migma</div><div class="tmeta"><span>★ 967</span><span class="s">8.1</span></div></div></div>
+      <div class="tile"><div class="tcover g5"></div><div class="tbody"><div class="tname">delta-view</div><div class="tmeta"><span>★ 1 433</span><span class="s">7.9</span></div></div></div>
+      <div class="tile"><div class="tcover g6"></div><div class="tbody"><div class="tname">ryadok</div><div class="tmeta"><span>★ 2 018</span><span class="s">7.8</span></div></div></div>
+      <div class="tile"><div class="tcover g7"></div><div class="tbody"><div class="tname">kust</div><div class="tmeta"><span>★ 745</span><span class="s">7.5</span></div></div></div>
+      <div class="tile"><div class="tcover g8"></div><div class="tbody"><div class="tname">prism-cli</div><div class="tmeta"><span>★ 1 102</span><span class="s">7.4</span></div></div></div>
+      <div class="tile"><div class="tcover g9"></div><div class="tbody"><div class="tname">oblaka</div><div class="tmeta"><span>★ 654</span><span class="s">7.1</span></div></div></div>
+      <div class="tile"><div class="tcover g10"></div><div class="tbody"><div class="tname">shtuka</div><div class="tmeta"><span>★ 488</span><span class="s">6.9</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- ЛИДЕРЫ ПО КАТЕГОРИЯМ -->
+  <section>
+    <div class="sec-head">
+      <span class="secno">§ 04</span>
+      <h2>Лидеры по категориям</h2>
+      <span class="tail">ПЕРЕСЧЁТ: ЕЖЕНЕДЕЛЬНО</span>
+    </div>
+    <div class="leaders">
+      <div class="lcol">
+        <div class="lhead"><h3>DevTools</h3><span>n = 32</span></div>
+        <div class="litem"><span class="rank">1.</span><div class="n"><div class="t">doc-diver</div><div class="d">Поиск по докам из терминала</div></div><span class="v">9.4</span></div>
+        <div class="litem"><span class="rank">2.</span><div class="n"><div class="t">kvazimodo</div><div class="d">Мок-сервер из OpenAPI</div></div><span class="v">9.1</span></div>
+        <div class="litem"><span class="rank">3.</span><div class="n"><div class="t">prism-cli</div><div class="d">Дифы конфигов с рисками</div></div><span class="v">7.4</span></div>
+      </div>
+      <div class="lcol">
+        <div class="lhead"><h3>Продуктивность</h3><span>n = 27</span></div>
+        <div class="litem"><span class="rank">1.</span><div class="n"><div class="t">гипертекст</div><div class="d">Заметки с локальной LLM</div></div><span class="v">9.1</span></div>
+        <div class="litem"><span class="rank">2.</span><div class="n"><div class="t">окно</div><div class="d">Тайловые вкладки браузера</div></div><span class="v">8.4</span></div>
+        <div class="litem"><span class="rank">3.</span><div class="n"><div class="t">tihiy</div><div class="d">Белый шум + помодоро</div></div><span class="v">8.2</span></div>
+      </div>
+      <div class="lcol">
+        <div class="lhead"><h3>Self-hosted</h3><span>n = 19</span></div>
+        <div class="litem"><span class="rank">1.</span><div class="n"><div class="t">bunker</div><div class="d">Менеджер секретов</div></div><span class="v">9.0</span></div>
+        <div class="litem"><span class="rank">2.</span><div class="n"><div class="t">sapsan</div><div class="d">Аналитика без кук</div></div><span class="v">8.7</span></div>
+        <div class="litem"><span class="rank">3.</span><div class="n"><div class="t">polka</div><div class="d">Домашняя библиотека</div></div><span class="v">8.6</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДАЙДЖЕСТ -->
+  <section class="digest">
+    <div class="dleft">
+      <span class="label">Приложение А</span>
+      <h2>Еженедельный дайджест</h2>
+      <p>Один выпуск в пятницу: десять лучших запусков недели, динамика звёзд и разбор одного репозитория. Формат — plain text, без трекеров.</p>
+    </div>
+    <div class="dright">
+      <input type="email" placeholder="EMAIL-АДРЕС" aria-label="Email для дайджеста">
+      <button type="submit">Подписаться</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap fgrid">
+    <div class="fcol fbrand">
+      <a class="logo" href="#"><span class="box"></span>viewcode</a>
+      <p>Реестр продуктов, созданных людьми совместно с AI-агентами. Ведётся с 2026 года.</p>
+    </div>
+    <div class="fcol">
+      <h4>Разделы</h4>
+      <ul><li><a href="#">Запуски дня</a></li><li><a href="#">Рейтинги</a></li><li><a href="#">Категории</a></li><li><a href="#">Архив</a></li></ul>
+    </div>
+    <div class="fcol">
+      <h4>Авторам</h4>
+      <ul><li><a href="#">Подача заявки</a></li><li><a href="#">Методика скора</a></li><li><a href="#">Реклама</a></li></ul>
+    </div>
+    <div class="fcol">
+      <h4>Служебное</h4>
+      <ul><li><a href="#">О реестре</a></li><li><a href="#">API</a></li><li><a href="#">Исходный код</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap fbottom">
+    <span>© 2026 VIEWCODE · ДОК. VC-2026-042</span>
+    <span>КОНЕЦ ДОКУМЕНТА</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+/* ============================================================
+   viewcode — forma.css
+   Только форма подачи: гейт логина, шаги, превью карточки,
+   бейдж и проверка README, экран успеха. Общее — в base.css.
+   ============================================================ */
+
+/* ============ КНОПКИ: на этой странице тап-таргет ≥44px и есть disabled ============ */
+.btn { min-height: 44px; }
+.btn-accent:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 22px -8px var(--accent-glow); }
+.btn-accent:active:not(:disabled) { transform: translateY(0); }
+.btn-accent:disabled {
+  background: var(--bg-raised);
+  color: var(--text-faint);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
+/* гасим общий hover из base.css на выключенной кнопке */
+.btn-accent:disabled:hover { transform: none; box-shadow: none; }
+
+/* demo-bar на этой странице — тоже с тап-таргетом */
+.demo-bar button { min-height: 44px; }
+
+/* ============ BREADCRUMBS ============ */
+.crumbs-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 26px 0 0;
+}
+.crumbs {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.crumbs a { color: var(--text-muted); transition: color var(--d-quick) var(--ease); }
+.crumbs a:hover { color: var(--accent); }
+.crumbs .sep { color: var(--text-faint); }
+.crumbs .here { color: var(--text); }
+
+/* ============ СОСТОЯНИЯ (гейт / форма) ============ */
+body.state-gate #formView { display: none; }
+body.state-form #gateView { display: none; }
+
+/* ============ ГЕЙТ (не залогинен) ============ */
+.gate-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 72px 0 24px;
+}
+.gate-card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 34px 30px 28px;
+  text-align: center;
+}
+.gate-card h1 {
+  font-family: var(--mono);
+  font-size: 24px;
+  letter-spacing: -0.6px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.gate-card .gate-sub {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 340px;
+  margin: 0 auto 24px;
+}
+.gate-card .btn-ghost {
+  justify-content: center;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 15px;
+}
+.gate-alt {
+  display: inline-block;
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-faint);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 8px 4px; /* тап-таргет */
+  transition: color var(--d-quick) var(--ease);
+}
+.gate-alt:hover { color: var(--accent); }
+
+/* ============ ФОРМА: ШАГИ ============ */
+.form-view { padding-bottom: 8px; }
+.form-head { padding: 8px 0 6px; }
+.form-head h1 {
+  font-family: var(--mono);
+  font-size: clamp(26px, 3.6vw, 36px);
+  letter-spacing: -1px;
+  font-weight: 750;
+  margin-bottom: 6px;
+}
+.form-head .form-sub { color: var(--text-muted); font-size: 15px; max-width: 560px; }
+
+.step {
+  margin-top: 34px;
+  scroll-margin-top: 90px; /* scrollIntoView не прячет заголовок под sticky-шапкой */
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px 26px;
+}
+.step.reveal { animation: card-in var(--d-slow) var(--ease) backwards; }
+.step.hidden { display: none; }
+.step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.step-num {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.step-head h2 {
+  font-family: var(--mono);
+  font-size: 19px;
+  letter-spacing: -0.4px;
+  font-weight: 700;
+}
+.step-head .step-meta { font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
+
+/* переключатель типа — две пилюли */
+.type-toggle {
+  display: inline-flex;
+  gap: 6px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px;
+  margin-bottom: 18px;
+  max-width: 100%;
+}
+.type-toggle button {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 10px 18px;
+  min-height: 44px;
+  white-space: nowrap;
+  transition: color var(--d-quick) var(--ease), background var(--d-quick) var(--ease);
+}
+.type-toggle button:hover { color: var(--text); }
+.type-toggle button[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--accent);
+  font-weight: 600;
+}
+
+/* поле URL в стиле search-box главной */
+.url-row { display: flex; gap: 10px; align-items: stretch; }
+.search-box {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 0 18px;
+  min-height: 54px;
+  transition: border-color var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease);
+}
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 10px 34px -14px var(--accent-glow);
+}
+.search-box .prompt { font-family: var(--mono); color: var(--accent); font-size: 17px; }
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  height: 52px;
+}
+.search-box input::placeholder { color: var(--text-faint); }
+.url-row .btn-accent { padding: 0 22px; font-size: 14.5px; }
+.url-hint { font-family: var(--mono); font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+.url-error { font-family: var(--mono); font-size: 12px; color: #e0a390; margin-top: 8px; }
+.search-box.error { border-color: #e0a390; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* дополнительные блоки для «Просто сайт» */
+.site-extra { display: none; margin-top: 20px; }
+.site-extra.show { display: block; animation: card-in var(--d-std) var(--ease) backwards; }
+.site-extra .extra-block + .extra-block { margin-top: 18px; }
+.extra-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+  display: block;
+}
+.extra-label .req { color: var(--accent); font-weight: 600; }
+.upload-zone {
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-inset);
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  cursor: pointer;
+  transition: border-color var(--d-quick) var(--ease), background var(--d-quick) var(--ease);
+}
+.upload-zone:hover, .upload-zone:focus-visible { border-color: var(--accent); }
+.upload-zone .uz-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 17px;
+  background: var(--bg-raised);
+}
+.upload-zone .uz-text { font-size: 14px; color: var(--text); }
+.upload-zone .uz-note { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
+.code-instruction {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  white-space: pre-wrap; /* переносы строк значимы: TXT-значение и мета-тег не должны сливаться */
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.code-instruction .c-cm { color: var(--text-faint); }
+.code-instruction .c-val { color: var(--accent); }
+
+/* ============ ШАГ 2: превью + поля ============ */
+.step2-grid {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.preview-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+/* карточка каталога — компонент .card из direction-d дословно (общий в base.css);
+   здесь превью статично: фон чуть глубже и без hover-подъёма */
+.card { background: var(--bg); transition: none; }
+.card:hover { transform: none; border-color: var(--border); box-shadow: none; }
+
+.fields { display: flex; flex-direction: column; gap: 18px; }
+.field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+.field input[type="text"], .field textarea {
+  width: 100%;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14.5px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease);
+}
+.field textarea { min-height: 76px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: var(--text-faint); }
+.field input:focus, .field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* чипсы категорий и тегов */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  min-height: 44px;
+  transition: color var(--d-quick) var(--ease), border-color var(--d-quick) var(--ease), background var(--d-quick) var(--ease);
+}
+.chip:hover { color: var(--text); border-color: var(--border-strong); }
+.chip[aria-pressed="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.chip.chip-reco {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.chip.chip-more { color: var(--text-faint); border-style: dashed; }
+.reco-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--accent);
+  margin-top: 10px;
+}
+.tags-note { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); margin-top: 10px; }
+.tag-add {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  max-width: 340px;
+}
+.tag-add input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease);
+}
+.tag-add input::placeholder { color: var(--text-faint); }
+.tag-add input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* ============ ШАГ 3: бейдж ============ */
+.badge-lead { color: var(--text-muted); font-size: 14.5px; max-width: 62ch; margin-bottom: 18px; }
+.badge-preview {
+  display: inline-flex;
+  padding: 12px 14px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  margin-bottom: 16px;
+}
+.badge-preview img { display: block; width: 88px; height: 20px; }
+.badge-code-row { display: flex; gap: 10px; align-items: stretch; }
+.badge-code {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--text-muted);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.copy-btn {
+  flex-shrink: 0;
+  align-self: stretch;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 0 16px;
+  min-height: 44px;
+  white-space: nowrap;
+  transition: color var(--d-quick) var(--ease), border-color var(--d-quick) var(--ease);
+}
+.copy-btn:hover { color: var(--text); border-color: var(--text-faint); }
+.copy-btn.copied { color: var(--accent); border-color: var(--accent); }
+
+.verify-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.verify-status {
+  display: none;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+.verify-status.show { display: inline-block; }
+.publish-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+.publish-row .btn-accent { padding: 12px 24px; font-size: 15px; }
+.publish-note { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); }
+
+/* спиннер — терминальный каретка-стиль */
+.spinner { display: inline-block; color: var(--accent); animation: blink 1.15s steps(1) infinite; }
+
+/* ============ ЭКРАН УСПЕХА ============ */
+.success-view { display: none; padding: 64px 0 24px; }
+.success-view.show { display: block; animation: card-in var(--d-slow) var(--ease) both; }
+.success-card {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 42px 32px 34px;
+}
+.success-card h2 {
+  font-family: var(--mono);
+  font-size: 26px;
+  letter-spacing: -0.7px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.success-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+.success-card .proj-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 10px 4px;
+  margin-bottom: 22px;
+  transition: color var(--d-quick) var(--ease);
+}
+.success-card .proj-link:hover { color: var(--text); }
+.share-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.success-note {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+/* ============ FOOTER ============ */
+footer { padding: 44px 0 96px; /* запас снизу под demo-bar */ }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 860px) {
+  .step2-grid { grid-template-columns: minmax(0, 1fr); }
+  .step2-grid .preview-col { max-width: 420px; }
+}
+@media (max-width: 760px) {
+  .site-header { position: static; }
+  .demo-bar { bottom: 10px; right: 10px; max-width: calc(100vw - 20px); overflow-x: auto; scrollbar-width: none; }
+  .demo-bar .demo-label { display: none; }
+}
+@media (max-width: 661px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .url-row { flex-direction: column; }
+  .url-row .btn-accent { padding: 12px 22px; }
+  .step { padding: 20px 16px 22px; }
+  .gate-wrap { padding-top: 44px; }
+  .badge-code-row { flex-direction: column; }
+  .copy-btn { padding: 12px 16px; }
+  .tag-add { max-width: none; }
+}
+
+/* ============ REDUCED MOTION (страничное) ============ */
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+  .step.reveal, .success-view.show, .site-extra.show { animation: none; }
+}

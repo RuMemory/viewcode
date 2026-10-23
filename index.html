@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/index.css">
+<title>viewcode — витрина вайбкодных проектов</title>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="logo" href="#">
+      <span class="logo-mark">&gt;_</span>
+      viewcode
+    </a>
+    <div class="header-right">
+      <button class="lang-toggle" id="langToggle" aria-label="Переключить язык"><b>RU</b> / EN</button>
+      <a class="btn btn-accent" href="forma.html">+ Разместить — бесплатно</a>
+      <a class="btn btn-ghost" href="#" aria-label="Войти через GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="gh-text">Войти через GitHub</span>
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#leaders">Обратите внимание</a>
+      <a href="#launches">Проекты</a>
+      <a href="#digest">Дайджест</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="wrap">
+  <section class="hero" style="padding-bottom:56px">
+    <span class="hero-eyebrow"><i>●</i>&nbsp; индекс обновлён сегодня в 06:00 мск</span>
+    <h1>Навайбкодил? Покажи всему миру — бесплатно.</h1>
+    <p class="hero-sub">Сайты и GitHub-репозитории, собранные людьми вместе с AI-агентами. Смотрите, что запускают, и находите то, что можно использовать.</p>
+
+    <form class="search-box" role="search" onsubmit="return false">
+      <span class="prompt" aria-hidden="true">&gt;</span>
+      <input type="search" id="searchInput" placeholder="Поиск: «бот для скидок», «генератор обложек»…" aria-label="Поиск по проектам">
+      <kbd>Ctrl K</kbd>
+    </form>
+
+    <p class="hero-note">30 секунд по ссылке на GitHub — и проект в каталоге</p>
+
+    <div class="stats-line" role="group" aria-label="Статистика каталога">
+      <span><span class="prompt">$</span> <span class="cmd">viewcode stats --live</span></span>
+      <span aria-hidden="true">→</span>
+      <span><b data-count="312">0</b> проектов · <b data-count="48">0</b> за неделю · <b data-count="32">0</b> категории <span class="caret" aria-hidden="true">▌</span></span>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CATEGORY PILLS ================= -->
+<div class="cats-bar">
+  <div class="wrap">
+    <div class="cats-scroll" role="group" aria-label="Фильтр по категориям" id="catsBar">
+      <button class="pill" data-filter="all" aria-pressed="true">Все</button>
+      <button class="pill" data-filter="assistants" aria-pressed="false">AI-ассистенты</button>
+      <button class="pill" data-filter="images" aria-pressed="false">Генерация изображений</button>
+      <button class="pill" data-filter="video" aria-pressed="false">Видео</button>
+      <button class="pill" data-filter="code" aria-pressed="false">Инструменты кода</button>
+      <button class="pill" data-filter="automation" aria-pressed="false">Автоматизация</button>
+      <button class="pill" data-filter="marketing" aria-pressed="false">Маркетинг</button>
+      <button class="pill" data-filter="finance" aria-pressed="false">Финансы</button>
+      <button class="pill" data-filter="bots" aria-pressed="false">Боты</button>
+      <button class="pill" data-filter="games" aria-pressed="false">Игры</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SPOTLIGHT («Обратите внимание») ================= -->
+<div class="wrap">
+  <section id="leaders">
+    <div class="section-head">
+      <h2>Обратите внимание</h2>
+      <span class="meta">спонсорские места · аукцион — в кабинете рекламодателя</span>
+    </div>
+
+    <div class="spotlight-grid">
+
+      <article class="spotlight-card promoted">
+        <div class="cover demo-cover" style="background: linear-gradient(150deg, #1f2a26 0%, #3f7a62 100%);">
+          <span class="cover-letter">Mb</span>
+        </div>
+        <div class="spotlight-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">MCPbox</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Каталог MCP-серверов в одном CLI: ставит, настраивает и обновляет инструменты агента.</p>
+        </div>
+      </article>
+
+      <article class="spotlight-card promoted">
+        <div class="cover demo-cover" style="background: linear-gradient(125deg, #2e2119 0%, #9c5b33 100%);">
+          <span class="cover-letter">Sb</span>
+        </div>
+        <div class="spotlight-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Sobesednik</a>
+            <span class="card-cat">AI-ассистенты</span>
+          </div>
+          <p class="card-desc">Тренер собеседований: гоняет по алгоритмам и системному дизайну, разбор ошибок голосом.</p>
+        </div>
+      </article>
+
+      <article class="spotlight-card promoted">
+        <div class="cover demo-cover" style="background: linear-gradient(155deg, #2e2a1f 0%, #a8763e 100%);">
+          <span class="cover-letter">Px</span>
+        </div>
+        <div class="spotlight-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Pixelgorn</a>
+            <span class="card-cat">Генерация изображений</span>
+          </div>
+          <p class="card-desc">Генератор обложек и иллюстраций для инди-проектов. Стили хранятся как код и версионируются.</p>
+        </div>
+      </article>
+
+      <article class="spotlight-card promoted">
+        <div class="cover demo-cover" style="background: linear-gradient(130deg, #2e2319 0%, #a06a34 100%);">
+          <span class="cover-letter">Kd</span>
+        </div>
+        <div class="spotlight-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Kadrly</a>
+            <span class="card-cat">Видео</span>
+          </div>
+          <p class="card-desc">Нарезает длинные видео на шортсы, сам пишет заголовки, субтитры и таймкоды.</p>
+        </div>
+      </article>
+
+      <article class="spotlight-card promoted">
+        <div class="cover demo-cover" style="background: linear-gradient(115deg, #24241c 0%, #a08a3c 100%);">
+          <span class="cover-letter">Mn</span>
+        </div>
+        <div class="spotlight-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Monetka</a>
+            <span class="card-cat">Финансы</span>
+          </div>
+          <p class="card-desc">Учёт личных финансов с прогнозом: подсказывает, когда можно себе новый ноутбук.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= LAUNCHES ================= -->
+  <section id="launches">
+    <div class="section-head">
+      <h2>Проекты вайбкодеров</h2>
+      <span class="meta">обновлено 06:00 мск · сортировка: сначала новые</span>
+    </div>
+
+    <div class="grid" id="cardGrid">
+
+      <!-- реальный проект: обложка — скриншот продукта (assets/maxgraph-demo.png) -->
+      <article class="card" data-cat="code">
+        <div class="cover photo">
+          <img class="cover-photo" src="assets/maxgraph-demo.png" alt="Скриншот MaxGraph: карта памяти агента — граф знаний со связями">
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="proekt.html">MaxGraph</a>
+            <span class="card-cat">Девтулзы</span>
+          </div>
+          <p class="card-desc">Память для ИИ-агентов (Claude, GPT, DeepSeek): MCP-сервер, граф знаний. Триал 7 дней.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 3</span>
+            <button class="like-btn" data-likes="2" aria-pressed="false" aria-label="Нравится MaxGraph">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">2</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="assistants">
+        <div class="cover demo-cover" style="background: linear-gradient(135deg, #3d2f1e 0%, #8a5a2b 100%);">
+          <span class="cover-letter">Pr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Promptkin</a>
+            <span class="card-cat">AI-ассистенты</span>
+          </div>
+          <p class="card-desc">Персональный ассистент, собранный из ваших заметок, почты и календаря. Работает локально, ничего не отправляет в облако.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 4 812</span>
+            <button class="like-btn" data-likes="214" aria-pressed="false" aria-label="Нравится Promptkin">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">214</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="code">
+        <div class="cover demo-cover" style="background: linear-gradient(150deg, #252a1e 0%, #7d8446 100%);">
+          <span class="cover-letter">Rf</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Refactobot</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">AI-напарник для ревью: находит мёртвый код, дубли и предлагает патчи прямо в pull request.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 5 130</span>
+            <button class="like-btn" data-likes="231" aria-pressed="false" aria-label="Нравится Refactobot">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">231</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="games">
+        <div class="cover demo-cover" style="background: linear-gradient(120deg, #2a241c 0%, #b8862f 100%);">
+          <span class="cover-letter">Rg</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Roguelight</a>
+            <span class="card-cat">Игры</span>
+          </div>
+          <p class="card-desc">Браузерный рогалик, где подземелье и квесты генерирует LLM. Каждый забег — новая история.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 3 655</span>
+            <button class="like-btn" data-likes="189" aria-pressed="false" aria-label="Нравится Roguelight">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">189</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card promoted" data-cat="marketing">
+        <div class="cover demo-cover" style="background: linear-gradient(140deg, #31241c 0%, #c17a45 100%);">
+          <span class="cover-letter">Lp</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Launchpeek</a>
+            <span class="card-cat">Маркетинг</span>
+          </div>
+          <p class="card-desc">Смотрит чужие запуски на Product Hunt и показывает, какие каналы реально привели трафик.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 410</span>
+            <button class="like-btn" data-likes="132" aria-pressed="false" aria-label="Нравится Launchpeek">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">132</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="images">
+        <div class="cover demo-cover" style="background: linear-gradient(155deg, #2e2a1f 0%, #a8763e 100%);">
+          <span class="cover-letter">Px</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Pixelgorn</a>
+            <span class="card-cat">Генерация изображений</span>
+          </div>
+          <p class="card-desc">Генератор обложек и иллюстраций для инди-проектов. Стили хранятся как код и версионируются.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 3 204</span>
+            <button class="like-btn" data-likes="96" aria-pressed="false" aria-label="Нравится Pixelgorn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">96</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="video">
+        <div class="cover demo-cover" style="background: linear-gradient(130deg, #2e2319 0%, #a06a34 100%);">
+          <span class="cover-letter">Kd</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Kadrly</a>
+            <span class="card-cat">Видео</span>
+          </div>
+          <p class="card-desc">Нарезает длинные видео на шортсы, сам пишет заголовки, субтитры и таймкоды.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 947</span>
+            <button class="like-btn" data-likes="148" aria-pressed="false" aria-label="Нравится Kadrly">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">148</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="automation">
+        <div class="cover demo-cover" style="background: linear-gradient(145deg, #2b2118 0%, #96603a 100%);">
+          <span class="cover-letter">Sf</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Svoyflow</a>
+            <span class="card-cat">Автоматизация</span>
+          </div>
+          <p class="card-desc">Визуальный конструктор автоматизаций для малого бизнеса. 40 интеграций из коробки.</p>
+          <div class="card-foot">
+            <span class="site-tag">сайт</span>
+            <button class="like-btn" data-likes="64" aria-pressed="false" aria-label="Нравится Svoyflow">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">64</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card promoted" data-cat="assistants">
+        <div class="cover demo-cover" style="background: linear-gradient(125deg, #2e2119 0%, #9c5b33 100%);">
+          <span class="cover-letter">Sb</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Sobesednik</a>
+            <span class="card-cat">AI-ассистенты</span>
+          </div>
+          <p class="card-desc">Тренер собеседований: гоняет по алгоритмам и системному дизайну, разбор ошибок голосом.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 299</span>
+            <button class="like-btn" data-likes="76" aria-pressed="false" aria-label="Нравится Sobesednik">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">76</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="bots">
+        <div class="cover demo-cover" style="background: linear-gradient(160deg, #2c2019 0%, #8f4f2e 100%);">
+          <span class="cover-letter">Bt</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Botanik</a>
+            <span class="card-cat">Боты</span>
+          </div>
+          <p class="card-desc">Telegram-бот, который следит за ценами на маркетплейсах и договаривается о скидке за вас.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 980</span>
+            <button class="like-btn" data-likes="41" aria-pressed="false" aria-label="Нравится Botanik">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">41</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="finance">
+        <div class="cover demo-cover" style="background: linear-gradient(115deg, #24241c 0%, #a08a3c 100%);">
+          <span class="cover-letter">Mn</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Monetka</a>
+            <span class="card-cat">Финансы</span>
+          </div>
+          <p class="card-desc">Учёт личных финансов с прогнозом: подсказывает, когда можно себе новый ноутбук.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 532</span>
+            <button class="like-btn" data-likes="58" aria-pressed="false" aria-label="Нравится Monetka">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">58</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="images">
+        <div class="cover demo-cover" style="background: linear-gradient(150deg, #1f2826 0%, #4a7a6f 100%);">
+          <span class="cover-letter">Gl</span>
+          <span class="unverified-badge">не подтверждено автором</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Glassey</a>
+            <span class="card-cat">Генерация изображений</span>
+          </div>
+          <p class="card-desc">Превращает скриншоты в аккуратные мокапы для лендинга за десять секунд.</p>
+          <a class="claim-link" href="#">Это мой проект</a>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 208</span>
+            <button class="like-btn" data-likes="88" aria-pressed="false" aria-label="Нравится Glassey">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">88</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-cat="automation">
+        <div class="cover demo-cover" style="background: linear-gradient(135deg, #28241f 0%, #6e6248 100%);">
+          <span class="cover-letter">Cr</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Cronosaur</a>
+            <span class="card-cat">Автоматизация</span>
+          </div>
+          <p class="card-desc">Cron с человеческим лицом: расписания пишутся словами, а логи читаются как история.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 120</span>
+            <button class="like-btn" data-likes="52" aria-pressed="false" aria-label="Нравится Cronosaur">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">52</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="empty-note" id="emptyNote" role="status">// в этой категории сегодня тихо — загляните завтра</div>
+  </section>
+
+  <!-- ================= DIGEST ================= -->
+  <section id="digest" style="padding-top:0">
+    <div class="digest">
+      <h2>Дайджест недели</h2>
+      <p>Каждую пятницу — десять самых интересных вайбкодных запусков, коротко и без шума. Одно письмо в неделю, отписка в один клик.</p>
+      <form class="digest-form" id="digestForm">
+        <input type="email" required placeholder="you@example.com" aria-label="Электронная почта">
+        <button class="btn btn-accent" type="submit">Подписаться</button>
+      </form>
+      <div class="digest-done" id="digestDone" role="status">✓ готово — первое письмо придёт в пятницу</div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#" style="font-size:17px">
+          <span class="logo-mark" style="width:24px;height:24px;font-size:12px">&gt;_</span>
+          viewcode
+        </a>
+        <p class="footer-about">Витрина проектов, созданных людьми вместе с AI-агентами. Каталог, рейтинги и еженедельный дайджест.</p>
+      </div>
+      <div class="footer-col">
+        <h3>ПРОДУКТ</h3>
+        <a href="#leaders">Обратите внимание</a>
+        <a href="#launches">Проекты</a>
+        <a href="#digest">Дайджест</a>
+        <a href="forma.html">+ Разместить проект</a>
+      </div>
+      <div class="footer-col">
+        <h3>СООБЩЕСТВО</h3>
+        <a href="#">GitHub</a>
+        <a href="#">Telegram</a>
+        <a href="#">Discord</a>
+        <a href="#">RSS</a>
+      </div>
+      <div class="footer-col">
+        <h3>КОМПАНИЯ</h3>
+        <a href="#">О проекте</a>
+        <a href="#">Реклама и спонсорство</a>
+        <a href="#">Контакты</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 viewcode</span>
+      <span>сделано вайбкодерами</span>
+    </div>
+  </div>
+</footer>
+
+<script src="scripts/common.js" defer></script>
+<script src="scripts/index.js" defer></script>
+</body>
+</html>

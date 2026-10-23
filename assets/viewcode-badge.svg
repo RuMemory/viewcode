@@ -1,0 +1,8 @@
+<svg width="88" height="20" viewBox="0 0 88 20" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="listed on viewcode">
+  <rect x="0" y="0" width="88" height="20" rx="4" fill="#151310"/>
+  <rect x="0" y="0" width="20" height="20" fill="#242019"/>
+  <path d="M0 0 h88 a0 0 0 0 1 0 0 v20 h-88 a0 0 0 0 1 0 0 z" fill="none"/>
+  <rect x="0" y="0" width="88" height="20" rx="4" fill="none" stroke="rgba(236,228,214,0.14)"/>
+  <text x="10" y="14" font-family="JetBrains Mono, Consolas, monospace" font-size="10" font-weight="700" fill="#8fd0ab" text-anchor="middle">&gt;_</text>
+  <text x="26" y="14" font-family="JetBrains Mono, Consolas, monospace" font-size="10" font-weight="700" fill="#ece4d6">viewcode</text>
+</svg>

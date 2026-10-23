@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/forma.css">
+<title>Разместить проект — viewcode</title>
+</head>
+<body class="state-gate">
+
+<!-- ================= DEMO BAR (только мокап) ================= -->
+<div class="demo-bar" role="group" aria-label="Состояние мокапа">
+  <span class="demo-label">состояние:</span>
+  <button data-state="gate" aria-pressed="true">не залогинен</button>
+  <button data-state="form" aria-pressed="false">форма</button>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">&gt;_</span>
+      viewcode
+    </a>
+    <div class="header-right">
+      <button class="lang-toggle" id="langToggle" aria-label="Переключить язык"><b>RU</b> / EN</button>
+      <a class="btn btn-accent" href="forma.html">+ Разместить — бесплатно</a>
+      <a class="btn btn-ghost" href="#" aria-label="Войти через GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="gh-text">Войти через GitHub</span>
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="index.html#leaders">Обратите внимание</a>
+      <a href="index.html#launches">Проекты</a>
+      <a href="index.html#digest">Дайджест</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= BREADCRUMBS ================= -->
+  <div class="crumbs-row">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <span aria-hidden="true">~</span><span class="sep">/</span>
+      <a href="index.html#launches">проекты</a><span class="sep">/</span>
+      <span class="here" aria-current="page">разместить</span>
+    </nav>
+  </div>
+
+  <!-- ================= СОСТОЯНИЕ 1: ГЕЙТ ================= -->
+  <div class="gate-wrap" id="gateView">
+    <div class="gate-card">
+      <h1>Разместить проект</h1>
+      <p class="gate-sub">Войди через GitHub — импорт займёт 30 секунд</p>
+      <a class="btn btn-ghost" href="#" aria-label="Войти через GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        Войти через GitHub
+      </a>
+      <a class="gate-alt" href="#">или по email с кодом</a>
+    </div>
+  </div>
+
+  <!-- ================= СОСТОЯНИЕ 2: ФОРМА ================= -->
+  <div class="form-view" id="formView">
+    <div class="form-head">
+      <h1>Разместить проект</h1>
+      <p class="form-sub">Три шага: ссылка → проверка карточки → бейдж. Секции раскрываются по ходу.</p>
+    </div>
+
+    <div id="stepsView">
+      <!-- ============ ШАГ 1: ССЫЛКА ============ -->
+      <section class="step" aria-labelledby="step1Title">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">$ 01</span>
+          <h2 id="step1Title">Ссылка</h2>
+        </div>
+
+        <div class="type-toggle" role="group" aria-label="Тип проекта">
+          <button id="typeRepo" aria-pressed="true">GitHub-репозиторий</button>
+          <button id="typeSite" aria-pressed="false">Просто сайт</button>
+        </div>
+
+        <form id="urlForm" onsubmit="return false">
+          <div class="url-row">
+            <div class="search-box">
+              <span class="prompt" aria-hidden="true">&gt;</span>
+              <input type="text" id="urlInput" placeholder="github.com/you/project" aria-label="Ссылка на проект" autocomplete="off" spellcheck="false">
+            </div>
+            <button class="btn btn-accent" type="submit" id="importBtn">Импортировать</button>
+          </div>
+          <p class="url-hint" id="urlHint">// вставь ссылку — название, описание, тема и теги подтянутся сами</p>
+          <p class="url-error" id="urlError" role="alert" hidden>// сначала вставь ссылку — без неё импортировать нечего</p>
+        </form>
+
+        <!-- дополнительно для «Просто сайт» -->
+        <div class="site-extra" id="siteExtra">
+          <div class="extra-block">
+            <span class="extra-label" id="uploadLabel">СКРИНШОТ <span class="req">· обязательно</span></span>
+            <div class="upload-zone" role="button" tabindex="0" aria-labelledby="uploadLabel">
+              <span class="uz-icon" aria-hidden="true">⇪</span>
+              <span>
+                <span class="uz-text">Перетащи скриншот или выбери файл</span>
+                <span class="uz-note" style="display:block">png / jpg — конвертируем в webp</span>
+              </span>
+            </div>
+          </div>
+          <div class="extra-block">
+            <span class="extra-label">ПОДТВЕРЖДЕНИЕ ДОМЕНА</span>
+            <div class="code-instruction"><span class="c-cm"># добавь TXT-запись в DNS:</span>
+<span class="c-val">viewcode-verify=vc_7f3a9c2e</span>
+
+<span class="c-cm"># или мета-тег в &lt;head&gt;:</span>
+&lt;meta name="viewcode-verify" content="<span class="c-val">vc_7f3a9c2e</span>"&gt;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ШАГ 2: ПРОВЕРЬ КАРТОЧКУ ============ -->
+      <section class="step hidden" id="step2" aria-labelledby="step2Title">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">$ 02</span>
+          <h2 id="step2Title">Проверь карточку</h2>
+          <span class="step-meta" id="step2Meta">// импортировано из GitHub</span>
+        </div>
+
+        <div class="step2-grid">
+          <div class="preview-col">
+            <p class="preview-label">ТАК БУДЕТ ВЫГЛЯДЕТЬ В КАТАЛОГЕ</p>
+            <article class="card">
+              <div class="cover photo">
+                <img class="cover-photo" src="assets/maxgraph-demo.png" alt="Скриншот MaxGraph: карта памяти агента — граф знаний со связями">
+              </div>
+              <div class="card-body">
+                <div class="card-topline">
+                  <span class="card-name" id="previewName">MaxGraph</span>
+                  <span class="card-cat" id="previewCat">Инструменты кода</span>
+                </div>
+                <p class="card-desc" id="previewDesc">Память для ИИ-агентов (Claude, GPT, DeepSeek): MCP-сервер, граф знаний. Триал 7 дней.</p>
+                <div class="card-foot">
+                  <span class="stars"><i>★</i> 3</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="fields">
+            <div class="field">
+              <label for="fName">НАЗВАНИЕ</label>
+              <input type="text" id="fName" value="MaxGraph">
+            </div>
+            <div class="field">
+              <label for="fDesc">ОПИСАНИЕ</label>
+              <textarea id="fDesc">Память для ИИ-агентов (Claude, GPT, DeepSeek): MCP-сервер, граф знаний. Триал 7 дней.</textarea>
+            </div>
+            <div class="field">
+              <label id="catLabel">КАТЕГОРИЯ</label>
+              <div class="chips" role="group" aria-labelledby="catLabel">
+                <button class="chip chip-reco" aria-pressed="true" data-cat="Инструменты кода">Инструменты кода</button>
+                <button class="chip" aria-pressed="false">AI-ассистенты</button>
+                <button class="chip" aria-pressed="false">Генерация изображений</button>
+                <button class="chip" aria-pressed="false">Видео</button>
+                <button class="chip" aria-pressed="false">Автоматизация</button>
+                <button class="chip" aria-pressed="false">Маркетинг</button>
+                <button class="chip" aria-pressed="false">Финансы</button>
+                <button class="chip" aria-pressed="false">Боты</button>
+                <button class="chip chip-more" aria-pressed="false">ещё 24…</button>
+              </div>
+              <span class="reco-note">✦ AI рекомендует «Инструменты кода» — рекомендация по README</span>
+            </div>
+            <div class="field">
+              <label id="tagsLabel">ТЕГИ</label>
+              <div class="chips" id="tagChips" role="group" aria-labelledby="tagsLabel">
+                <button class="chip" aria-pressed="true">mcp</button>
+                <button class="chip" aria-pressed="true">agent-memory</button>
+                <button class="chip" aria-pressed="true">knowledge-graph</button>
+                <button class="chip" aria-pressed="true">semantic-search</button>
+                <button class="chip" aria-pressed="true">llm</button>
+                <button class="chip" aria-pressed="true">local-first</button>
+              </div>
+              <div class="tag-add">
+                <input type="text" id="tagInput" placeholder="добавить тег" aria-label="Добавить свой тег">
+                <button class="btn btn-ghost" id="tagAddBtn" type="button">+ тег</button>
+              </div>
+              <p class="tags-note">// теги = топики репозитория, по ним работает поиск</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ШАГ 3: БЕЙДЖ В README ============ -->
+      <section class="step hidden" id="step3" aria-labelledby="step3Title">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">$ 03</span>
+          <h2 id="step3Title">Бейдж в README</h2>
+        </div>
+
+        <p class="badge-lead">Обязательно: бейдж viewcode в README — так бот подтверждает, что репозиторий твой.</p>
+
+        <div class="badge-preview">
+          <img src="assets/viewcode-badge.svg" alt="Бейдж viewcode" width="88" height="20">
+        </div>
+
+        <div class="badge-code-row">
+          <div class="badge-code" id="badgeCode">[![Listed on viewcode](https://viewcode.dev/badge/RuMemory/maxgraph.svg)](https://viewcode.dev/p/maxgraph)</div>
+          <button class="copy-btn" id="copyBadge" aria-label="Копировать markdown бейджа">копировать</button>
+        </div>
+
+        <div class="verify-row">
+          <button class="btn btn-ghost" id="verifyBtn">Проверить README</button>
+          <span class="verify-status" id="verifyStatus" role="status" aria-live="polite"></span>
+        </div>
+
+        <div class="publish-row">
+          <button class="btn btn-accent" id="publishBtn" disabled aria-describedby="publishNote">Опубликовать</button>
+          <span class="publish-note" id="publishNote">// сначала проверь README — без бейджа не опубликуем</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ ЭКРАН УСПЕХА ============ -->
+    <div class="success-view" id="successView">
+      <div class="success-card">
+        <h2 tabindex="-1" id="successTitle">✓ Проект в каталоге</h2>
+        <p>MaxGraph опубликован и уже виден в выдаче.</p>
+        <a class="proj-link" href="proekt.html">viewcode.dev/p/maxgraph →</a>
+        <div class="share-row">
+          <button class="share-btn" aria-label="Поделиться в X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2.1h3.68l-8.04 9.19L24 23.9h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 2.1h7.59l5.24 6.93 6.07-6.93zm-1.29 19.6h2.04L6.49 4.16H4.3l13.31 17.54z"/></svg>
+            Поделиться в X
+          </button>
+          <button class="share-btn" aria-label="Поделиться в Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.04 15.51l-.38 5.36c.54 0 .78-.23 1.06-.51l2.55-2.44 5.28 3.87c.97.53 1.66.25 1.92-.89L21.9 4.5c.31-1.42-.51-1.98-1.45-1.63L2.62 10.1c-1.39.54-1.37 1.32-.24 1.67l4.56 1.42L17.48 6.7c.5-.33.95-.15.58.18l-8.02 8.63z"/></svg>
+            в Telegram
+          </button>
+        </div>
+        <p class="success-note">// карточка уже видна; LLM-постмодерация в фоне, жалобы разбираем за 24ч</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="index.html" style="font-size:17px">
+          <span class="logo-mark" style="width:24px;height:24px;font-size:12px">&gt;_</span>
+          viewcode
+        </a>
+        <p class="footer-about">Витрина проектов, созданных людьми вместе с AI-агентами. Каталог, рейтинги и еженедельный дайджест.</p>
+      </div>
+      <div class="footer-col">
+        <h3>ПРОДУКТ</h3>
+        <a href="index.html#leaders">Обратите внимание</a>
+        <a href="index.html#launches">Проекты</a>
+        <a href="index.html#digest">Дайджест</a>
+        <a href="forma.html">+ Разместить проект</a>
+      </div>
+      <div class="footer-col">
+        <h3>СООБЩЕСТВО</h3>
+        <a href="#">GitHub</a>
+        <a href="#">Telegram</a>
+        <a href="#">Discord</a>
+        <a href="#">RSS</a>
+      </div>
+      <div class="footer-col">
+        <h3>КОМПАНИЯ</h3>
+        <a href="#">О проекте</a>
+        <a href="#">Реклама и спонсорство</a>
+        <a href="#">Контакты</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 viewcode</span>
+      <span>сделано вайбкодерами</span>
+    </div>
+    <!-- анонсы для скринридера (импорт и т.п.) -->
+    <div class="visually-hidden" aria-live="polite" id="announcer"></div>
+  </div>
+</footer>
+
+<script src="scripts/common.js" defer></script>
+<script src="scripts/forma.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/kategoriya.css">
+<title>Инструменты кода — viewcode</title>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">&gt;_</span>
+      viewcode
+    </a>
+    <div class="header-right">
+      <button class="lang-toggle" id="langToggle" aria-label="Переключить язык"><b>RU</b> / EN</button>
+      <a class="btn btn-accent" href="forma.html">+ Разместить — бесплатно</a>
+      <a class="btn btn-ghost" href="#" aria-label="Войти через GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="gh-text">Войти через GitHub</span>
+      </a>
+    </div>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="index.html#leaders">Обратите внимание</a>
+      <a href="index.html#launches">Проекты</a>
+      <a href="index.html#digest">Дайджест</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= BREADCRUMBS ================= -->
+  <div class="crumbs-row">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <span aria-hidden="true">~</span><span class="sep">/</span>
+      <a href="#">категории</a><span class="sep">/</span>
+      <span class="here" aria-current="page">инструменты-кода</span>
+    </nav>
+    <span class="cat-meta">36 проектов · обновлено сегодня 06:00 мск</span>
+  </div>
+
+  <!-- ================= CATEGORY INTRO ================= -->
+  <section class="cat-hero" style="padding-top:22px">
+    <h1 class="cat-title">Инструменты кода</h1>
+    <p class="cat-intro">Здесь живут инструменты, которые вайбкодеры собрали с AI-агентами для самих себя: ревьюеры, линтеры, генераторы тестов, MCP-серверы и сниппет-хранилища. От «обычных» девтулзов их отличает то, как они сделаны и с кем работают: агент здесь не довесок, а основной пользователь — интерфейс часто командная строка или протокол, а не кнопки. Если инструмент экономит вам часы в редакторе и рядом с кодом — он в этой категории.</p>
+
+    <!-- лента тегов: клик фильтрует обе сетки -->
+    <div class="tags-ribbon" role="group" aria-label="Фильтр по тегам" id="tagsBar">
+      <button class="pill" data-tag="all" aria-pressed="true">все</button>
+      <button class="pill" data-tag="mcp" aria-pressed="false">mcp</button>
+      <button class="pill" data-tag="cli" aria-pressed="false">cli</button>
+      <button class="pill" data-tag="code-review" aria-pressed="false">code-review</button>
+      <button class="pill" data-tag="рефакторинг" aria-pressed="false">рефакторинг</button>
+      <button class="pill" data-tag="тесты" aria-pressed="false">тесты</button>
+      <button class="pill" data-tag="линтеры" aria-pressed="false">линтеры</button>
+      <button class="pill" data-tag="сниппеты" aria-pressed="false">сниппеты</button>
+      <button class="pill" data-tag="документация" aria-pressed="false">документация</button>
+    </div>
+  </section>
+
+  <!-- ================= ЛУЧШЕЕ ПРЕДЛОЖЕНИЕ ================= -->
+  <section aria-labelledby="top5Title">
+    <div class="section-head">
+      <h2 id="top5Title">Лучшее предложение</h2>
+      <span class="meta">топ недели · обновляется ежедневно</span>
+    </div>
+
+    <div class="top5-grid" id="top5Grid">
+
+      <article class="card" data-tags="линтеры mcp">
+        <div class="cover" style="background: linear-gradient(140deg, #2a2e1e 0%, #6e7a3c 100%);">
+          <span class="cover-letter">Al</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Agentlint</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Линтер для агентов: ловит галлюцинации в AI-сгенерированном коде до коммита.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 904</span>
+            <button class="like-btn" data-likes="87" aria-pressed="false" aria-label="Нравится Agentlint">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">87</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card promoted" data-tags="mcp cli">
+        <div class="cover" style="background: linear-gradient(150deg, #1f2a26 0%, #3f7a62 100%);">
+          <span class="cover-letter">Mb</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">MCPbox</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Каталог MCP-серверов в одном CLI: ставит, настраивает и обновляет инструменты агента.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 376</span>
+            <button class="like-btn" data-likes="112" aria-pressed="false" aria-label="Нравится MCPbox">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">112</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="code-review">
+        <div class="cover" style="background: linear-gradient(125deg, #2e2119 0%, #9c5b33 100%);">
+          <span class="cover-letter">Rp</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Reviewpilot</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Ревьюит PR за ночь: комментарии по делу, без придирок к отступам и точкам с запятой.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 688</span>
+            <button class="like-btn" data-likes="74" aria-pressed="false" aria-label="Нравится Reviewpilot">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">74</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card promoted" data-tags="сниппеты cli">
+        <div class="cover" style="background: linear-gradient(155deg, #2e2a1f 0%, #a8763e 100%);">
+          <span class="cover-letter">Sk</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Snipkeep</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Сниппеты, которые не теряются: ищет по смыслу и подставляет в IDE горячей клавишей.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 412</span>
+            <button class="like-btn" data-likes="66" aria-pressed="false" aria-label="Нравится Snipkeep">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">66</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="тесты">
+        <div class="cover" style="background: linear-gradient(130deg, #26221c 0%, #8a6a34 100%);">
+          <span class="cover-letter">Tf</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Testforge</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Куёт тесты из описания фичи: читает issue и приносит готовый набор кейсов.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 205</span>
+            <button class="like-btn" data-likes="59" aria-pressed="false" aria-label="Нравится Testforge">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">59</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="empty-note" id="top5Empty" role="status">// в топе недели по этому тегу пусто</div>
+  </section>
+
+  <!-- ================= ОСНОВНАЯ СЕТКА ================= -->
+  <section aria-labelledby="gridTitle">
+    <div class="section-head" style="margin-bottom:18px">
+      <h2 id="gridTitle">Все инструменты кода</h2>
+      <span class="meta" id="gridCount">12 из 36</span>
+    </div>
+
+    <!-- табы сортировки -->
+    <div class="sort-row">
+      <div class="sort-tabs" role="group" aria-label="Сортировка проектов" id="sortTabs">
+        <button class="pill" data-sort="score" aria-pressed="true">Популярные</button>
+        <button class="pill" data-sort="date" aria-pressed="false">Новые</button>
+        <button class="pill" data-sort="stars" aria-pressed="false">По звёздам</button>
+      </div>
+      <span class="sort-meta" id="sortMeta">сортировка: популярные</span>
+    </div>
+
+    <div class="grid" id="cardGrid">
+
+      <article class="card" data-tags="рефакторинг code-review" data-score="98" data-date="2026-09-14" data-stars="5130">
+        <div class="cover" style="background: linear-gradient(150deg, #252a1e 0%, #7d8446 100%);">
+          <span class="cover-letter">Rf</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Refactobot</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">AI-напарник для ревью: находит мёртвый код, дубли и предлагает патчи прямо в pull request.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 5 130</span>
+            <button class="like-btn" data-likes="231" aria-pressed="false" aria-label="Нравится Refactobot">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">231</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="cli mcp" data-score="91" data-date="2026-10-02" data-stars="4210">
+        <div class="cover" style="background: linear-gradient(135deg, #1e2a2a 0%, #4a7a72 100%);">
+          <span class="cover-letter">Gg</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Grepglot</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Grep по смыслу: понимает «где мы валидируем email» и находит это в любом виде.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 4 210</span>
+            <button class="like-btn" data-likes="188" aria-pressed="false" aria-label="Нравится Grepglot">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">188</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="тесты cli" data-score="88" data-date="2026-08-21" data-stars="3877">
+        <div class="cover" style="background: linear-gradient(120deg, #2a241c 0%, #b8862f 100%);">
+          <span class="cover-letter">Tv</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Testovich</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Догенерирует тесты до зелёного покрытия и честно помечает те, что написал сам.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 3 877</span>
+            <button class="like-btn" data-likes="164" aria-pressed="false" aria-label="Нравится Testovich">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">164</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="линтеры code-review" data-score="84" data-date="2026-07-30" data-stars="2904">
+        <div class="cover" style="background: linear-gradient(145deg, #2b2118 0%, #96603a 100%);">
+          <span class="cover-letter">Lv</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Lintvin</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Линтер, который объясняет правила по-человечески и сам чинит половину замечаний.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 904</span>
+            <button class="like-btn" data-likes="121" aria-pressed="false" aria-label="Нравится Lintvin">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">121</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="сниппеты cli" data-score="80" data-date="2026-10-11" data-stars="2450">
+        <div class="cover" style="background: linear-gradient(140deg, #31241c 0%, #c17a45 100%);">
+          <span class="cover-letter">Sn</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Snipeshka</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Сниппеты из ваших же репозиториев: агент сам вырезает удачные куски и складывает в библиотеку.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 450</span>
+            <button class="like-btn" data-likes="103" aria-pressed="false" aria-label="Нравится Snipeshka">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">103</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="документация mcp" data-score="77" data-date="2026-06-15" data-stars="2018">
+        <div class="cover" style="background: linear-gradient(155deg, #232a1e 0%, #5f7a3e 100%);">
+          <span class="cover-letter">Dm</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Documole</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Роет код и приносит документацию: README, диаграммы модулей и changelog сами собой.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 2 018</span>
+            <button class="like-btn" data-likes="91" aria-pressed="false" aria-label="Нравится Documole">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">91</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="code-review рефакторинг" data-score="73" data-date="2026-09-28" data-stars="1640">
+        <div class="cover" style="background: linear-gradient(160deg, #2c2019 0%, #8f4f2e 100%);">
+          <span class="cover-letter">Dk</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Diffkin</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Читает diff как редактор журнала: короткий пересказ, что изменилось и чем это грозит.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 640</span>
+            <button class="like-btn" data-likes="78" aria-pressed="false" aria-label="Нравится Diffkin">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">78</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="cli сниппеты" data-score="69" data-date="2026-10-18" data-stars="1330">
+        <div class="cover" style="background: linear-gradient(115deg, #24241c 0%, #a08a3c 100%);">
+          <span class="cover-letter">Km</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Kommitello</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Пишет сообщения коммитов из diff'а: conventional commits без душнилы в голове.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 330</span>
+            <button class="like-btn" data-likes="64" aria-pressed="false" aria-label="Нравится Kommitello">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">64</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="тесты линтеры" data-score="64" data-date="2026-05-12" data-stars="1090">
+        <div class="cover" style="background: linear-gradient(150deg, #1f2826 0%, #4a7a6f 100%);">
+          <span class="cover-letter">Pk</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Pokryvalo</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Покрытие тестами как тепловая карта: видно, где код голый, ещё до падения в проде.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 1 090</span>
+            <button class="like-btn" data-likes="52" aria-pressed="false" aria-label="Нравится Pokryvalo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">52</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="линтеры cli" data-score="60" data-date="2026-04-03" data-stars="880">
+        <div class="cover" style="background: linear-gradient(135deg, #28241f 0%, #6e6248 100%);">
+          <span class="cover-letter">Hs</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Hookster</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Pre-commit хуки, которые пишет агент под ваш стек: секреты, формат, миграции — всё ловится до push.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 880</span>
+            <button class="like-btn" data-likes="43" aria-pressed="false" aria-label="Нравится Hookster">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">43</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-tags="документация code-review" data-score="55" data-date="2026-10-20" data-stars="640">
+        <div class="cover" style="background: linear-gradient(125deg, #2e2319 0%, #a06a34 100%);">
+          <span class="cover-letter">Ob</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Obyasnyalo</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Объясняет чужой код на пальцах: выделяете функцию — получаете абзац без воды.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 640</span>
+            <button class="like-btn" data-likes="35" aria-pressed="false" aria-label="Нравится Obyasnyalo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">35</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- реальный проект: обложка — скриншот продукта -->
+      <article class="card" data-tags="mcp документация" data-score="41" data-date="2026-10-14" data-stars="3">
+        <div class="cover photo">
+          <img class="cover-photo" src="assets/maxgraph-demo.png" alt="Скриншот MaxGraph: карта памяти агента — граф знаний со связями">
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="proekt.html">MaxGraph</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Память для ИИ-агентов (Claude, GPT, DeepSeek): MCP-сервер, граф знаний. Триал 7 дней.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 3</span>
+            <button class="like-btn" data-likes="2" aria-pressed="false" aria-label="Нравится MaxGraph">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">2</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== скрытые до «Показать ещё» ===== -->
+      <article class="card extra" data-tags="тесты рефакторинг" data-score="38" data-date="2026-03-19" data-stars="420">
+        <div class="cover" style="background: linear-gradient(140deg, #2a251c 0%, #7a6a3e 100%);">
+          <span class="cover-letter">Tg</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Typegadalka</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Угадывает типы в динамическом коде и пишет аннотации, которые проходят mypy с первого раза.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 420</span>
+            <button class="like-btn" data-likes="21" aria-pressed="false" aria-label="Нравится Typegadalka">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">21</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card extra" data-tags="рефакторинг cli" data-score="34" data-date="2026-02-08" data-stars="350">
+        <div class="cover" style="background: linear-gradient(150deg, #25221e 0%, #846a46 100%);">
+          <span class="cover-letter">Mg</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Migraino</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Миграции без мигрени: переводит проект на новый фреймворк пошагово, с тестами на каждый шаг.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 350</span>
+            <button class="like-btn" data-likes="17" aria-pressed="false" aria-label="Нравится Migraino">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">17</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card extra" data-tags="cli тесты" data-score="30" data-date="2026-10-19" data-stars="290">
+        <div class="cover" style="background: linear-gradient(130deg, #20261e 0%, #5a7a44 100%);">
+          <span class="cover-letter">Sv</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Stackved</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Разбирает стектрейс и ведёт прямо к строке, даже если ошибка пришла из продакшена клиента.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 290</span>
+            <button class="like-btn" data-likes="14" aria-pressed="false" aria-label="Нравится Stackved">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">14</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card extra" data-tags="документация mcp" data-score="27" data-date="2026-01-25" data-stars="210">
+        <div class="cover" style="background: linear-gradient(145deg, #26221c 0%, #8a5f3a 100%);">
+          <span class="cover-letter">As</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Apispravka</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Справка по вашему API из кода: эндпоинты, схемы и примеры запросов всегда свежие.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 210</span>
+            <button class="like-btn" data-likes="11" aria-pressed="false" aria-label="Нравится Apispravka">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">11</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card extra" data-tags="сниппеты тесты" data-score="22" data-date="2026-08-30" data-stars="150">
+        <div class="cover" style="background: linear-gradient(120deg, #2a241c 0%, #96862f 100%);">
+          <span class="cover-letter">Rx</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Regexper</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Регулярки с тестами: агент пишет выражение и сразу доказывает, что оно не взорвётся на боевых данных.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 150</span>
+            <button class="like-btn" data-likes="8" aria-pressed="false" aria-label="Нравится Regexper">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">8</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card extra" data-tags="cli линтеры" data-score="18" data-date="2026-10-06" data-stars="95">
+        <div class="cover" style="background: linear-gradient(155deg, #1f2626 0%, #4a6e6f 100%);">
+          <span class="cover-letter">Bk</span>
+        </div>
+        <div class="card-body">
+          <div class="card-topline">
+            <a class="card-name" href="#">Benchkin</a>
+            <span class="card-cat">Инструменты кода</span>
+          </div>
+          <p class="card-desc">Бенчмарки в одну команду: сравнивает вашу правку с мастером и показывает разницу в табличке.</p>
+          <div class="card-foot">
+            <span class="stars"><i>★</i> 95</span>
+            <button class="like-btn" data-likes="5" aria-pressed="false" aria-label="Нравится Benchkin">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">5</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="empty-note" id="gridEmpty" role="status">// по этому тегу в категории тихо — попробуйте другой</div>
+
+    <div class="more-row">
+      <button class="btn btn-ghost" id="showMore">Показать ещё</button>
+    </div>
+    <div class="more-done" id="moreDone" role="status">// больше нет — вы всё посмотрели</div>
+  </section>
+
+  <!-- ================= СМЕЖНЫЕ ЗАДАЧИ ================= -->
+  <section aria-labelledby="relatedTitle">
+    <h2 class="related-title" id="relatedTitle">СМЕЖНЫЕ ЗАДАЧИ</h2>
+    <div class="related-row">
+      <a class="pill" href="#">Девтулзы</a>
+      <a class="pill" href="#">Автоматизация</a>
+      <a class="pill" href="#">AI-ассистенты</a>
+      <a class="pill" href="#">Данные и аналитика</a>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" aria-labelledby="faqTitle">
+    <div class="section-head">
+      <h2 id="faqTitle">Вопросы о категории</h2>
+      <span class="meta">частые вопросы</span>
+    </div>
+
+    <details>
+      <summary>Чем вайбкод-инструмент отличается от обычного?<span class="faq-marker" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Тем, кто его главный пользователь. Обычный инструмент построен вокруг кнопок и интерфейса для человека; вайбкод-инструмент — вокруг агента: командная строка, MCP-протокол, понятный машине вывод. Человек ставит задачу, агент гоняет инструмент. Поэтому здесь ценятся не красивые дашборды, а честные exit-коды, читаемые логи и документация, которую агент поймёт без подсказок.</div>
+    </details>
+
+    <details>
+      <summary>Как попасть в категорию?<span class="faq-marker" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Разместите проект по кнопке «+ Разместить» — достаточно ссылки на GitHub или сайт, это занимает около 30 секунд. Категорию модератор выберет по описанию и README: если инструмент работает рядом с кодом (ревью, тесты, линтинг, сниппеты, документация), он попадёт сюда. Бот проверит, что бейдж viewcode есть в README, — после этого проект получит отметку «проверен».</div>
+    </details>
+
+    <details>
+      <summary>Как работает ранжирование?<span class="faq-marker" aria-hidden="true">+</span></summary>
+      <div class="faq-body">В основе — живость проекта и реакция сообщества: свежие коммиты, лайки в каталоге, звёзды и темп их роста. Дизлайки проект не топят — они уходят в модерацию как сигнал о качестве. Вкладки «Популярные», «Новые» и «По звёздам» просто переключают разрез одной и той же выдачи, ничего не скрывая.</div>
+    </details>
+
+    <details>
+      <summary>Как продвинуть проект?<span class="faq-marker" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Через аукцион дней в кабинете автора: выбираете день, делаете ставку — и если она выигрывает, проект на весь день занимает одно из мест в блоке «Лучшее предложение» вверху категории. Никаких меток «реклама» у карточки нет, но и ранжирование основной сетки продвижение не меняет — там по-прежнему решают лайки и активность репозитория.</div>
+    </details>
+  </section>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="index.html" style="font-size:17px">
+          <span class="logo-mark" style="width:24px;height:24px;font-size:12px">&gt;_</span>
+          viewcode
+        </a>
+        <p class="footer-about">Витрина проектов, созданных людьми вместе с AI-агентами. Каталог, рейтинги и еженедельный дайджест.</p>
+      </div>
+      <div class="footer-col">
+        <h3>ПРОДУКТ</h3>
+        <a href="index.html#leaders">Обратите внимание</a>
+        <a href="index.html#launches">Проекты</a>
+        <a href="index.html#digest">Дайджест</a>
+        <a href="forma.html">+ Разместить проект</a>
+      </div>
+      <div class="footer-col">
+        <h3>СООБЩЕСТВО</h3>
+        <a href="#">GitHub</a>
+        <a href="#">Telegram</a>
+        <a href="#">Discord</a>
+        <a href="#">RSS</a>
+      </div>
+      <div class="footer-col">
+        <h3>КОМПАНИЯ</h3>
+        <a href="#">О проекте</a>
+        <a href="#">Реклама и спонсорство</a>
+        <a href="#">Контакты</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 viewcode</span>
+      <span>сделано вайбкодерами</span>
+    </div>
+  </div>
+</footer>
+
+<script src="scripts/common.js" defer></script>
+<script src="scripts/kategoriya.js" defer></script>
+</body>
+</html>

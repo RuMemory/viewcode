@@ -1,0 +1,257 @@
+/* ============================================================
+   viewcode — index.css
+   Только главная: hero, поиск, лента категорий, сетка проектов,
+   spotlight («Обратите внимание»), дайджест. Общее — в base.css.
+   ============================================================ */
+
+/* ============ HERO ============ */
+.hero { text-align: center; padding: 88px 0 56px; }
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: inline-block;
+  padding: 5px 14px;
+  margin-bottom: 26px;
+  letter-spacing: 0.3px;
+}
+.hero-eyebrow i { color: var(--accent); font-style: normal; transition: color var(--d-std) var(--ease); }
+.hero h1 {
+  font-family: var(--mono);
+  font-size: clamp(32px, 5.2vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -1.6px;
+  font-weight: 750;
+  max-width: 780px;
+  margin: 0 auto 18px;
+}
+.hero-sub {
+  color: var(--text-muted);
+  font-size: 17.5px;
+  max-width: 560px;
+  margin: 0 auto 38px;
+}
+
+.search-box {
+  max-width: 660px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 0 20px;
+  height: 58px;
+  transition: border-color var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease);
+}
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 10px 34px -14px var(--accent-glow);
+}
+.search-box .prompt { font-family: var(--mono); color: var(--accent); font-size: 17px; transition: color var(--d-std) var(--ease); }
+.search-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  height: 100%;
+}
+.search-box input::placeholder { color: var(--text-faint); }
+.search-box kbd {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+.stats-line {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.stats-line .prompt { color: var(--accent); transition: color var(--d-std) var(--ease); }
+.stats-line .cmd { color: var(--text-faint); }
+.stats-line b {
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--d-std) var(--ease);
+}
+.caret { color: var(--accent); animation: blink 1.15s steps(1) infinite; }
+
+.hero-note {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-faint);
+}
+
+/* ============ CATEGORY PILLS ============ */
+.cats-bar {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  position: sticky;
+  top: 65px;
+  z-index: 40;
+  background: rgba(26, 23, 20, 0.92);
+  backdrop-filter: blur(12px);
+}
+.cats-scroll {
+  display: flex;
+  gap: 6px; /* экономия 18px на 9 промежутках — лента влезает в десктоп без переполнения */
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px;
+  /* затухание правого края — индикатор, что лента скроллится (пилюли шире контейнера вплоть до десктопа) */
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent 100%);
+}
+.cats-scroll::-webkit-scrollbar { display: none; }
+
+/* ============ SECTIONS ============ */
+section { padding: 64px 0 8px; }
+/* якоря не должны прятать заголовки под sticky-хромом (header 64px + cats-bar ~66px) */
+section[id] { scroll-margin-top: 140px; }
+
+/* ============ CARD GRID ============ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ============ SPOTLIGHT («Обратите внимание» — спонсорские места, аукцион) ============ */
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 карточек — как «Лучшее предложение» в категориях */
+  gap: 18px;
+}
+.spotlight-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease),
+              border-color var(--d-std) var(--ease);
+}
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 14px 40px -14px var(--accent-glow);
+}
+.spotlight-card .cover { aspect-ratio: 16 / 9; }
+.spotlight-card .cover-letter { font-size: 44px; }
+.spotlight-body { padding: 15px 16px 13px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.spotlight-body .card-name { font-size: 16px; }
+.spotlight-body .card-desc { font-size: 13.2px; -webkit-line-clamp: 2; }
+
+/* ============ DIGEST ============ */
+.digest {
+  margin: 64px 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background:
+    radial-gradient(90% 160% at 50% -40%, var(--accent-soft), transparent 60%),
+    var(--bg-raised);
+  padding: 52px 32px;
+  text-align: center;
+}
+.digest h2 { font-family: var(--mono); font-size: 27px; letter-spacing: -0.7px; font-weight: 700; margin-bottom: 10px; }
+.digest p { color: var(--text-muted); font-size: 15px; max-width: 460px; margin: 0 auto 26px; }
+.digest-form {
+  display: flex;
+  gap: 10px;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.digest-form input {
+  flex: 1;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color var(--d-std) var(--ease), box-shadow var(--d-std) var(--ease);
+  min-width: 0;
+}
+.digest-form input::placeholder { color: var(--text-faint); }
+.digest-form input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.digest-done {
+  display: none;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent);
+  transition: color var(--d-std) var(--ease);
+}
+.digest-done.show { display: block; animation: card-in var(--d-std) var(--ease) both; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 960px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 1040px) {
+  .spotlight-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 760px) {
+  .spotlight-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .spotlight-grid { grid-template-columns: 1fr; }
+}
+/* 761–1040px: шапка переносится в два ряда (117px) — лента липнет под неё, иначе наложение на 52px */
+@media (min-width: 761px) and (max-width: 1040px) {
+  .cats-bar { top: 117px; }
+}
+/* шапка в 2 ряда (117px) + лента (~66px): якорю нужен больший отступ */
+@media (min-width: 662px) and (max-width: 1040px) {
+  section[id] { scroll-margin-top: 192px; }
+}
+@media (max-width: 760px) {
+  .cats-bar { top: 117px; } /* шапка в 2 ряда = 117px (после увеличения hit-areas контролов) */
+}
+@media (max-width: 661px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 56px 0 44px; }
+  .hero h1 { letter-spacing: -1px; }
+  .search-box kbd { display: none; }
+  .digest { padding: 38px 20px; }
+  .digest-form { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  section { padding-top: 48px; }
+  /* лента категорий не липнет: высота шапки на узких экранах разная, а фиксированный top даёт наложение */
+  .cats-bar { position: static; }
+  /* шапка ~211px sticky съедала 25–32% вьюпорта — на узких экранах скроллим её вместе со страницей */
+  .site-header { position: static; }
+  /* sticky-хрома не осталось — якорю хватает небольшого визуального отступа */
+  section[id] { scroll-margin-top: 24px; }
+}
+
+/* ============ REDUCED MOTION (страничное) ============ */
+@media (prefers-reduced-motion: reduce) {
+  .caret { animation: none; }
+}
